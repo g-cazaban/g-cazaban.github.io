@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 617px;
+            height: 633px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/CMRInfrastructure_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-41.811858095414195,-34.19653319843927],[53.31498435687783,58.518218161560085]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_CMRInfrastructure_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['_index'] !== null ? autolinker.link(feature.properties['_index'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gpsEduc'] !== null ? autolinker.link(feature.properties['gpsEduc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gpsHealth'] !== null ? autolinker.link(feature.properties['gpsHealth'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gpsYouthOrga'] !== null ? autolinker.link(feature.properties['gpsYouthOrga'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/consent'] !== null ? autolinker.link(feature.properties['groupEducation/consent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/consentEduc'] !== null ? autolinker.link(feature.properties['groupEducation/consentEduc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResource'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResource'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceType'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceType/construction'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceType/construction'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceType/funding'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceType/funding'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceType/furniture'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceType/furniture'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceType/other'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceType/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceType/supply'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceType/supply'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceType/training'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceType/training'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/governmentResourceTypeOther'] !== null ? autolinker.link(feature.properties['groupEducation/governmentResourceTypeOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/_gpsEduc_altitude'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/_gpsEduc_altitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/_gpsEduc_latitude'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/_gpsEduc_latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/_gpsEduc_longitude'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/_gpsEduc_longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/_gpsEduc_precision'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/_gpsEduc_precision'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/educationInstitution'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/educationInstitution'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistance'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/construction'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/construction'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/funding'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/funding'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/furniture'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/furniture'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/other'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/supply'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/supply'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/training'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGov/training'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGovOther'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceGovOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceNgo'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceNgo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/building'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/building'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/competingPriority'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/competingPriority'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/electricity'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/electricity'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/financialReport'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/financialReport'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/funding'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/funding'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/furniture'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/furniture'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/latrine'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/latrine'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/learningMaterial'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/learningMaterial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/narrativeReport'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/narrativeReport'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/other'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/staffing'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/staffing'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/target'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/target'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/teachingMaterial'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/teachingMaterial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/water'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceType/water'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceTypeOther'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/assistanceTypeOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challenge'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challenge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeAssistance'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeAssistance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/building'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/building'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/competingPriority'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/competingPriority'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/electricity'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/electricity'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/financialReport'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/financialReport'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/funding'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/funding'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/furniture'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/furniture'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/latrine'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/latrine'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/learningMaterial'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/learningMaterial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/narrativeReport'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/narrativeReport'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/other'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/staffing'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/staffing'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/target'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/target'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/teachingMaterial'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/teachingMaterial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/water'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescription/water'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescriptionOther'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducChallenge/challengeDescriptionOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/completionDoc'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/completionDoc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/completionDocRecognition'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/completionDocRecognition'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/effort'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/effort'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/emergency'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/emergency'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/feeReduction'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/feeReduction'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/peacebuilding'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/peacebuilding'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/peacebuildingDescription'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/peacebuildingDescription'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/recreation'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/recreation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/textbook'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducCurriculum/textbook'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/classroomNb'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/classroomNb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/courseNb'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/courseNb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/groupConsentParticipation'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/groupConsentParticipation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high10'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high10'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high10Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high10Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high10Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high10Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high11'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high11'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high11Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high11Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high11Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high11Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high9'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high9'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high9Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high9Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high9Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/high9Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/hour'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/hour'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle7'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle7'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle7Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle7Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle8'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle8'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle8Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle8Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle8Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle8Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle9'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle9'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle9Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle9Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle9Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/middle9Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/homework'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/homework'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/opinion'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/opinion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/other'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/termExam'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/termExam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/test'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/test'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/yearExam'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performance/yearExam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performanceOther'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/performanceOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/price'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/price'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary1'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary1Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary1Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary1Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary1Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary2'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary2Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary2Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary2Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary2Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary3'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary3Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary3Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary3Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary3Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary4'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary4Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary4Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary4Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary4Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary5'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary5'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary5Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary5Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary5Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary5Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary6'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary6'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary6Girl'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary6Girl'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary6Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary6Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary7Teacher'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/primary7Teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/qualificationPercentage'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/qualificationPercentage'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/qualificationPercentageFemale'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/qualificationPercentageFemale'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/teacherFacility'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/teacherFacility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/teacherFemale'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/teacherFemale'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/teacherMale'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducFunctionning/teacherMale'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducReporting/reportingSystem'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducReporting/reportingSystem'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducReporting/reportingSystemNo'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducReporting/reportingSystemNo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducReporting/reportingSystemYes'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducReporting/reportingSystemYes'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducReporting/schoolCommitee'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducReporting/schoolCommitee'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducReporting/statement'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducReporting/statement'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/armedGroup'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/armedGroup'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/attendance'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/attendance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/improvement'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/improvement'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/peaceCulture'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/peaceCulture'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/shelter'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/shelter'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/shelterPeriod'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducSecurity/shelterPeriod'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/educDisability'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/educDisability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/educOwnership'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/educOwnership'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/feedingProgram'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/feedingProgram'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/feedingProgramDescription'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/feedingProgramDescription'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/handwashing'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/handwashing'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/handwashingNb'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/handwashingNb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/latrine'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/latrine'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/latrineGender'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/latrineGender'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/latrineWomen'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/latrineWomen'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/operational'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/operational'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repair'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repair'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/bench'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/bench'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/blackboard'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/blackboard'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/chair'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/chair'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/classroom'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/classroom'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/desk'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/desk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/offuce'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/offuce'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/other'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/roof'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/roof'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/table'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/table'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/wall'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairType/wall'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairTypeOther'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/groupEducStatus/repairTypeOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/nameEduc'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/nameEduc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupConsentEduc/pictureEduc'] !== null ? autolinker.link(feature.properties['groupEducation/groupConsentEduc/pictureEduc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/groupEducStatus/disability'] !== null ? autolinker.link(feature.properties['groupEducation/groupEducStatus/disability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/noteEducIntro'] !== null ? autolinker.link(feature.properties['groupEducation/noteEducIntro'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/studentClass'] !== null ? autolinker.link(feature.properties['groupEducation/studentClass'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupEducation/teacherClass'] !== null ? autolinker.link(feature.properties['groupEducation/teacherClass'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/consentHlt'] !== null ? autolinker.link(feature.properties['groupHealth/consentHlt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/consent_001'] !== null ? autolinker.link(feature.properties['groupHealth/consent_001'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/_gpsHealth_altitude'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/_gpsHealth_altitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/_gpsHealth_latitude'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/_gpsHealth_latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/_gpsHealth_longitude'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/_gpsHealth_longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/_gpsHealth_precision'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/_gpsHealth_precision'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthCertificate'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthCertificate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthCertificateRecognition'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthCertificateRecognition'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthCertificateTime'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthCertificateTime'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthRecord'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/birthRecord'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/femaleProfessional'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltCertificate/femaleProfessional'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/admission'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/admission'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/bed'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/bed'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/hltDisability'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/hltDisability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralDistance'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralDistance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralReceive'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralReceive'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralReceiveDescription'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralReceiveDescription'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralSend'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralSend'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralSendDescription'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralSendDescription'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralTime'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/referralTime'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/staff'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/staff'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/staffFemale'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/staffFemale'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/staffFemalePosition'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltFunctinonning/staffFemalePosition'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/ambulance'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/ambulance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/ambulanceFee'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/ambulanceFee'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/codeConduct'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/codeConduct'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/patientRecord'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/patientRecord'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/preventionProcedure'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/preventionProcedure'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/preventionProcedurePosted'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/preventionProcedurePosted'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/providerTraining'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/providerTraining'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/providerTrainingFemale'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/providerTrainingFemale'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/providerTrainingMale'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/providerTrainingMale'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/service'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/service'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/service247'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/service247'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/service247Reason'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/service247Reason'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFee'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFee'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFeeAffordable'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFeeAffordable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFeeType'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFeeType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFeeWho'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceFeeWho'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceWomen'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceWomen'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceWomenType'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/serviceWomenType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/waitingTime'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/waitingTime'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/wellBeingRisk'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/wellBeingRisk'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/wellBeingRiskLocation'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/wellBeingRiskLocation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/youthService'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/youthService'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltService/youthServiceTYpe'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltService/youthServiceTYpe'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/feedbackMechanism'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/feedbackMechanism'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/monitoringSystem'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/monitoringSystem'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/monitoringSystemYouth'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/monitoringSystemYouth'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/preventionGbv'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/preventionGbv'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/preventionGbvStructure'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/preventionGbvStructure'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolence'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolence'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceCase'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceCase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceFrequence'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceFrequence'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceResponse'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceResponse'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceResponseNo'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/sexualViolenceResponseNo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/groupHltSrh/srMaterial'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/groupHltSrh/srMaterial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/healthInstitution'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/healthInstitution'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/nameHealth'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/nameHealth'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/groupConsentHlt/pictureHealth'] !== null ? autolinker.link(feature.properties['groupHealth/groupConsentHlt/pictureHealth'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/monitorig'] !== null ? autolinker.link(feature.properties['groupHealth/monitorig'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupHealth/noteHltIntro'] !== null ? autolinker.link(feature.properties['groupHealth/noteHltIntro'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/consentParticipation'] !== null ? autolinker.link(feature.properties['groupParticipation/consentParticipation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/consent_002'] !== null ? autolinker.link(feature.properties['groupParticipation/consent_002'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/orgaDisability'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/orgaDisability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/orgaDisabilityDescription'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/orgaDisabilityDescription'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForum'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForum'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumFrequence'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumFrequence'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/community'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/community'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/gov'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/gov'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/ngo'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/ngo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/other'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/youth'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganization/youth'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganizationOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumOrganizationOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumParticipation'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation/groupParticipationForum/youthForumParticipation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_altitude'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_altitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_latitude'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_longitude'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_precision'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/_gpsYouthOrga_precision'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/advocacy'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/advocacy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/childhoodDev'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/childhoodDev'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/conflictResolution'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/conflictResolution'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/eco'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/eco'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/educ'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/educ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/gender'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/gender'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/hlt'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/hlt'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/ict'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/ict'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/nutrition'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/nutrition'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/protection'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/protection'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/srh'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/srh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/wash'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/activities/wash'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/orgaSize'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/orgaSize'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/orgaSizeWomen'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/orgaSizeWomen'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/organizationActivitiy'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationActivity/organizationActivitiy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallenge'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallenge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/building'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/building'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/competingPriority'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/competingPriority'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/electricity'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/electricity'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/financialReport'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/financialReport'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/funding'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/funding'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/furniture'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/furniture'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/latrine'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/latrine'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/learningMaterial'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/learningMaterial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/narrativeReport'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/narrativeReport'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/other'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/staffing'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/staffing'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/target'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/target'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/teacher'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/teacher'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/teachingMaterial'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/teachingMaterial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/water'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaChallengeType/water'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupport'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupport'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/advocacy'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/advocacy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/capital'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/capital'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/financialLiteracy'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/financialLiteracy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/other'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/peacefulDialogue'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/peacefulDialogue'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/skilledTraining'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportArea/skilledTraining'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportAreaOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportAreaOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/government'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/government'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/ngo'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/ngo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/other'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/other'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/private'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeople/private'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeopleOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/orgaSupportPeopleOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionCommunityLeader'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionCommunityLeader'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionCommunityMeeting'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionCommunityMeeting'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionFamilyMeeting'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionFamilyMeeting'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussion/discussionOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussionOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemDiscussionOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionCommunityLeader'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionCommunityLeader'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionCommunityMeeting'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionCommunityMeeting'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionFamilyMeeting'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionFamilyMeeting'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionLegal'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionLegal'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionSecurityAgency'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionSecurityAgency'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionconflictResolution'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutionconflictResolution'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutiongov'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolution/solutiongov'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolutionOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/problemSolutionOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/supportKNowledge'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationChallenge/supportKNowledge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registration'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registration'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registrationInformed'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registrationInformed'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registrationIntent'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registrationIntent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registrationYear'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/groupParticipationRegistration/registrationYear'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/nameLga'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/nameLga'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/nameyouthOrga'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/nameyouthOrga'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/organization'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/organization'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/organizationOther'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/organizationOther'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/groupConsentParticipation_001/pictureYouthOrga'] !== null ? autolinker.link(feature.properties['groupParticipation/groupConsentParticipation_001/pictureYouthOrga'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['groupParticipation/noteParticipationIntro'] !== null ? autolinker.link(feature.properties['groupParticipation/noteParticipationIntro'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['noteEnd'] !== null ? autolinker.link(feature.properties['noteEnd'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['serviceType'] !== null ? autolinker.link(feature.properties['serviceType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['today'] !== null ? autolinker.link(feature.properties['today'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CMRInfrastructure_1_0() {
+            return {
+                pane: 'pane_CMRInfrastructure_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CMRInfrastructure_1');
+        map.getPane('pane_CMRInfrastructure_1').style.zIndex = 401;
+        map.getPane('pane_CMRInfrastructure_1').style['mix-blend-mode'] = 'normal';
+        var layer_CMRInfrastructure_1 = new L.geoJson(json_CMRInfrastructure_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CMRInfrastructure_1',
+            layerName: 'layer_CMRInfrastructure_1',
+            pane: 'pane_CMRInfrastructure_1',
+            onEachFeature: pop_CMRInfrastructure_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CMRInfrastructure_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CMRInfrastructure_1);
+        map.addLayer(layer_CMRInfrastructure_1);
+        setBounds();
+        </script>
+    </body>
+</html>
